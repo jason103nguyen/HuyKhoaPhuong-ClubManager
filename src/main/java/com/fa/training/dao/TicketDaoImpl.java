@@ -1,4 +1,4 @@
 package com.fa.training.dao;
 
-public class MatchDao {
+public class TicketDaoImpl {
 }
