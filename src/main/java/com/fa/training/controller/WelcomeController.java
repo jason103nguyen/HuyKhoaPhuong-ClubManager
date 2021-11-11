@@ -9,17 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WelcomeController {
 
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
-    public String addUser() {
-
-        userService.create(new User("Huong", "2222", "huong@gmail.com"));
-
-        return "home.jsp";
-    }
-
+    /*Test here*/
     @GetMapping(value = "/hello")
     public String doGetHello() {
 
