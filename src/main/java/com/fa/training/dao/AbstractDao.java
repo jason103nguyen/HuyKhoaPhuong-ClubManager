@@ -10,22 +10,15 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public abstract class AbstractDao<T> {
 
     private Class<T> entityClass;
     private LocalSessionFactoryBean sessionFactory;
 
-    public AbstractDao(Class<T> entityClass) {
+    public AbstractDao(Class<T> entityClass, LocalSessionFactoryBean sessionFactory) {
         this.entityClass = entityClass;
-    }
-
-    @Autowired
-    public AbstractDao(LocalSessionFactoryBean sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -197,5 +190,4 @@ public abstract class AbstractDao<T> {
 
         return orderList;
     }
-
 }
