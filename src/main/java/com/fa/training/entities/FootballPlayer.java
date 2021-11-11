@@ -1,5 +1,7 @@
 package com.fa.training.entities;
 
+import com.fa.training.dto.FootballPlayerDto;
+
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +43,14 @@ public class FootballPlayer {
         this.startOfContract = startOfContract;
         this.endOfContract = endOfContract;
         this.number = number;
+    }
+
+    public FootballPlayer(FootballPlayerDto footballPlayerDto) {
+        this.name = footballPlayerDto.getName();
+        this.salary = footballPlayerDto.getSalary();
+        this.startOfContract = footballPlayerDto.getStartOfContract();
+        this.endOfContract = footballPlayerDto.getEndOfContract();
+        this.number = footballPlayerDto.getNumber();
     }
 
     public int getId() {
