@@ -1,14 +1,35 @@
 package com.fa.training.entities;
 
 import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "football_player")
 public class FootballPlayer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "fp_id")
     private int id;
+
+    @Column(name = "fp_name")
     private String name;
+
+    @Column(name = "fp_salary")
     private double salary;
+
+    @Column(name = "fp_start_of_contract")
     private LocalDate startOfContract;
+
+    @Column(name = "fp_end_of_contract")
     private LocalDate endOfContract;
+
+    @Column(name = "fp_number")
     private String number;
 
     public FootballPlayer() {
