@@ -11,25 +11,26 @@ public class FootballPlayerDto {
     private double salary;
     private LocalDate startOfContract;
     private LocalDate endOfContract;
-    private String number;
+    private String numberOfShirt;
 
     public FootballPlayerDto() {
     }
 
-    public FootballPlayerDto(String name, double salary, LocalDate startOfContract, LocalDate endOfContract, String number) {
+    public FootballPlayerDto(String name, double salary, LocalDate startOfContract, LocalDate endOfContract, String numberOfShirt) {
         this.name = name;
         this.salary = salary;
         this.startOfContract = startOfContract;
         this.endOfContract = endOfContract;
-        this.number = number;
+        this.numberOfShirt = numberOfShirt;
     }
 
     public FootballPlayerDto(FootballPlayer footballPlayer) {
+        this.id = footballPlayer.getId();
         this.name = footballPlayer.getName();
         this.salary = footballPlayer.getSalary();
         this.startOfContract = footballPlayer.getStartOfContract();
         this.endOfContract = footballPlayer.getEndOfContract();
-        this.number = footballPlayer.getNumber();
+        this.numberOfShirt = footballPlayer.getNumber();
     }
 
     public int getId() {
@@ -73,11 +74,11 @@ public class FootballPlayerDto {
     }
 
     public String getNumber() {
-        return number;
+        return numberOfShirt;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNumber(String numberOfShirt) {
+        this.numberOfShirt = numberOfShirt;
     }
 
     @Override
@@ -88,7 +89,7 @@ public class FootballPlayerDto {
                 ", salary=" + salary +
                 ", startOfContract=" + startOfContract +
                 ", endOfContract=" + endOfContract +
-                ", number='" + number + '\'' +
+                ", numberOfShirt='" + numberOfShirt + '\'' +
                 '}';
     }
 }

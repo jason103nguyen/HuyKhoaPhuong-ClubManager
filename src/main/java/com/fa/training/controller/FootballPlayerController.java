@@ -30,4 +30,20 @@ public class FootballPlayerController {
         footballPlayerService.create(footballPlayerDto);
         return "hello";
     }
+
+    @GetMapping(value = "/get-football-player-by-number-of-shirt")
+    public String doGetGetFootballPlayerByNumberOfShirt() {
+
+        FootballPlayerDto footballPlayer = new FootballPlayerDto("Phuong", 1000,
+                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                "14");
+
+        footballPlayerService.create(footballPlayer);
+
+        FootballPlayerDto fOutput = footballPlayerService.readByNumberOfShirt(footballPlayer.getNumber());
+        System.out.println(fOutput);
+
+        return "hello";
+    }
 }

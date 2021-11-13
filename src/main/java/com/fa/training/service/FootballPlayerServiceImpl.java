@@ -23,4 +23,14 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
     public void create(FootballPlayerDto footballPlayerDto) {
         footballPlayerDaoImpl.create(new FootballPlayer(footballPlayerDto));
     }
+
+    /**
+     * Get a football player by number of shirt
+     * @return
+     */
+    public FootballPlayerDto readByNumberOfShirt(String numberOfShirt) {
+
+        FootballPlayer footballPlayer = footballPlayerDaoImpl.readByNumberOfShirt(numberOfShirt);
+        return new FootballPlayerDto(footballPlayer);
+    }
 }

@@ -23,19 +23,9 @@ import javax.validation.constraints.NotNull;
 public class FootballPlayer {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator",
-            parameters = {
-                    @Parameter(
-                            name = "uuid_gen_strategy_class",
-                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
-                    )
-            }
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fp_id", updatable = false, nullable = false)
-    private UUID id;
+    private int id;
 
     @Column(name = "fp_name")
     @NotBlank(message = "{footballPlayer.name.Invalid}")
@@ -51,34 +41,35 @@ public class FootballPlayer {
     @Column(name = "fp_end_of_contract")
     private LocalDate endOfContract;
 
-    @Column(name = "fp_number")
-    @Length(min = 1, max = 3, message = "{footballPlayer.number.Invalid}")
-    private String number;
+    @Column(name = "fp_number", unique = true)
+    @Length(min = 1, max = 3, message = "{footballPlayer.numberOfShirt.Invalid}")
+    private String numberOfShirt;
 
     public FootballPlayer() {
     }
 
-    public FootballPlayer(String name, double salary, LocalDate startOfContract, LocalDate endOfContract, String number) {
+    public FootballPlayer(String name, double salary, LocalDate startOfContract, LocalDate endOfContract, String numberOfShirt) {
         this.name = name;
         this.salary = salary;
         this.startOfContract = startOfContract;
         this.endOfContract = endOfContract;
-        this.number = number;
+        this.numberOfShirt = numberOfShirt;
     }
 
     public FootballPlayer(FootballPlayerDto footballPlayerDto) {
+        this.id = footballPlayerDto.getId();
         this.name = footballPlayerDto.getName();
         this.salary = footballPlayerDto.getSalary();
         this.startOfContract = footballPlayerDto.getStartOfContract();
         this.endOfContract = footballPlayerDto.getEndOfContract();
-        this.number = footballPlayerDto.getNumber();
+        this.numberOfShirt = footballPlayerDto.getNumber();
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -115,11 +106,11 @@ public class FootballPlayer {
     }
 
     public String getNumber() {
-        return number;
+        return numberOfShirt;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNumber(String numberOfShirt) {
+        this.numberOfShirt = numberOfShirt;
     }
 
     @Override
@@ -130,7 +121,7 @@ public class FootballPlayer {
                 ", salary=" + salary +
                 ", startOfContract=" + startOfContract +
                 ", endOfContract=" + endOfContract +
-                ", number='" + number + '\'' +
+                ", numberOfShirt='" + numberOfShirt + '\'' +
                 '}';
     }
 }
