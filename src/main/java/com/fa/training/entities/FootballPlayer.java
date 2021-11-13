@@ -3,7 +3,10 @@ package com.fa.training.entities;
 import com.fa.training.dto.FootballPlayerDto;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
+import java.lang.annotation.Native;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -12,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "football_player")
@@ -33,9 +38,11 @@ public class FootballPlayer {
     private UUID id;
 
     @Column(name = "fp_name")
+    @NotBlank(message = "{footballPlayer.name.Invalid}")
     private String name;
 
     @Column(name = "fp_salary")
+    @Min(value = 0, message = "{footballPlayer.salary.Invalid}")
     private double salary;
 
     @Column(name = "fp_start_of_contract")
@@ -45,6 +52,7 @@ public class FootballPlayer {
     private LocalDate endOfContract;
 
     @Column(name = "fp_number")
+    @Length(min = 1, max = 3, message = "{footballPlayer.number.Invalid}")
     private String number;
 
     public FootballPlayer() {
