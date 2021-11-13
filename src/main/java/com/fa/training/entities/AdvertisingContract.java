@@ -1,18 +1,38 @@
 package com.fa.training.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "advertising_contract")
 public class AdvertisingContract {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contract_id")
     private int id;
+    
     private int playerId;
-    private int brandId;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "brand_id")
+    private Brand brand;
+    
     private double dealValue;
 
     public AdvertisingContract() {
     }
 
-    public AdvertisingContract(int playerId, int brandId, double dealValue) {
+    public AdvertisingContract(int playerId, Brand brand, double dealValue) {
         this.playerId = playerId;
-        this.brandId = brandId;
+        this.brand = brand;
         this.dealValue = dealValue;
     }
 
@@ -32,15 +52,15 @@ public class AdvertisingContract {
         this.playerId = playerId;
     }
 
-    public int getBrandId() {
-        return brandId;
-    }
+    public Brand getBrand() {
+		return brand;
+	}
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
 
-    public double getDealValue() {
+	public double getDealValue() {
         return dealValue;
     }
 
@@ -53,7 +73,7 @@ public class AdvertisingContract {
         return "AdvertisingContract{" +
                 "id=" + id +
                 ", playerId=" + playerId +
-                ", brandId=" + brandId +
+                ", brandId=" + brand.id +
                 ", dealValue=" + dealValue +
                 '}';
     }
