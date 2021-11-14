@@ -3,8 +3,8 @@ package com.fa.training.dto;
 import com.fa.training.entities.Match;
 
 import java.time.LocalDate;
-public class MatchDto {
 
+public class MatchDto {
 
     private int matchId;
     private double price;
