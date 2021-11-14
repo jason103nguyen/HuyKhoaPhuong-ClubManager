@@ -1,8 +1,10 @@
-package com.fa.training.service;
+package com.fa.training.service.impl;
 
 import com.fa.training.dao.FootballPlayerDaoImpl;
 import com.fa.training.dto.FootballPlayerDto;
 import com.fa.training.entities.FootballPlayer;
+import com.fa.training.service.FootballPlayerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

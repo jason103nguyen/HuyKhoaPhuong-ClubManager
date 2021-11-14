@@ -76,4 +76,15 @@ public class AdvertisingContractDto {
 		return a;
 	}
 
+	public AdvertisingContractDto transformPersistentToDto(final AdvertisingContract contract) {
+		AdvertisingContractDto dto = new AdvertisingContractDto();
+
+		dto.setId(contract.getId());
+		dto.setBrand(contract.getBrand());
+		dto.setPlayerId(contract.getPlayerId());
+		dto.setDealValue(contract.getDealValue());
+
+		return dto;
+	}
+
 }
