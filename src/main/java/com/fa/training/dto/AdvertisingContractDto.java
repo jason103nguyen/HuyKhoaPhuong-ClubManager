@@ -2,12 +2,13 @@ package com.fa.training.dto;
 
 import com.fa.training.entities.AdvertisingContract;
 import com.fa.training.entities.Brand;
+import com.fa.training.entities.FootballPlayer;
 
 public class AdvertisingContractDto {
 
 	private int id;
 
-	private int playerId;
+	private FootballPlayerDto footballPlayerDto;
 
 	private Brand brand;
 
@@ -17,17 +18,17 @@ public class AdvertisingContractDto {
 
 	}
 
-	public AdvertisingContractDto(int playerId, Brand brand, double dealValue) {
+	public AdvertisingContractDto(FootballPlayerDto footballPlayerDto, Brand brand, double dealValue) {
 		super();
-		this.playerId = playerId;
+		this.footballPlayerDto = footballPlayerDto;
 		this.brand = brand;
 		this.dealValue = dealValue;
 	}
 
-	public AdvertisingContractDto(int id, int playerId, Brand brand, double dealValue) {
+	public AdvertisingContractDto(int id, FootballPlayerDto footballPlayerDto, Brand brand, double dealValue) {
 		super();
 		this.id = id;
-		this.playerId = playerId;
+		this.footballPlayerDto = footballPlayerDto;
 		this.brand = brand;
 		this.dealValue = dealValue;
 	}
@@ -40,12 +41,12 @@ public class AdvertisingContractDto {
 		this.id = id;
 	}
 
-	public int getPlayerId() {
-		return playerId;
+	public FootballPlayerDto getFootballPlayerDto() {
+		return footballPlayerDto;
 	}
 
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
+	public void setFootballPlayerDto(FootballPlayerDto footballPlayerDto) {
+		this.footballPlayerDto = footballPlayerDto;
 	}
 
 	public Brand getBrand() {
@@ -71,7 +72,8 @@ public class AdvertisingContractDto {
 			a.setBrand(this.brand);
 		}
 
-		a.setPlayerId(this.playerId);
+		FootballPlayer footballPlayer = new FootballPlayer(this.footballPlayerDto);
+		a.setFootballPlayer(footballPlayer);
 		a.setDealValue(this.dealValue);
 		return a;
 	}
