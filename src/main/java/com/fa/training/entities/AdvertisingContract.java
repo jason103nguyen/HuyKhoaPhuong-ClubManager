@@ -18,20 +18,23 @@ public class AdvertisingContract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contract_id")
     private int id;
-    
-    private int playerId;
+
+	@ManyToOne
+    @JoinColumn(name = "fp_id", referencedColumnName = "fp_id")
+    private FootballPlayer footballPlayer;
     
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "brand_id")
     private Brand brand;
-    
+
+    @Column(name = "deal_value")
     private double dealValue;
 
     public AdvertisingContract() {
     }
 
-    public AdvertisingContract(int playerId, Brand brand, double dealValue) {
-        this.playerId = playerId;
+    public AdvertisingContract(FootballPlayer footballPlayer, Brand brand, double dealValue) {
+        this.footballPlayer = footballPlayer;
         this.brand = brand;
         this.dealValue = dealValue;
     }
@@ -44,12 +47,12 @@ public class AdvertisingContract {
         this.id = id;
     }
 
-    public int getPlayerId() {
-        return playerId;
+    public FootballPlayer getFootballPlayer() {
+        return footballPlayer;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setFootballPlayer(FootballPlayer footballPlayer) {
+        this.footballPlayer = footballPlayer;
     }
 
     public Brand getBrand() {
@@ -72,7 +75,7 @@ public class AdvertisingContract {
     public String toString() {
         return "AdvertisingContract{" +
                 "id=" + id +
-                ", playerId=" + playerId +
+                ", footballPlayer=" + footballPlayer +
                 ", brandId=" + brand.id +
                 ", dealValue=" + dealValue +
                 '}';

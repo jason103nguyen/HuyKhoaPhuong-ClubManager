@@ -1,22 +1,13 @@
 package com.fa.training.entities;
 
 import com.fa.training.dto.FootballPlayerDto;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import java.lang.annotation.Native;
 import java.time.LocalDate;
-import java.util.UUID;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "football_player")
@@ -44,6 +35,9 @@ public class FootballPlayer {
     @Column(name = "fp_number", unique = true)
     @Length(min = 1, max = 3, message = "{footballPlayer.numberOfShirt.Invalid}")
     private String numberOfShirt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "footballPlayer")
+    private Set<AdvertisingContract> advertisingContracts;
 
     public FootballPlayer() {
     }
@@ -113,6 +107,14 @@ public class FootballPlayer {
         this.numberOfShirt = numberOfShirt;
     }
 
+    public Set<AdvertisingContract> getAdvertisingContracts() {
+        return advertisingContracts;
+    }
+
+    public void setAdvertisingContracts(Set<AdvertisingContract> advertisingContracts) {
+        this.advertisingContracts = advertisingContracts;
+    }
+
     @Override
     public String toString() {
         return "FootballPlayer{" +
@@ -122,6 +124,7 @@ public class FootballPlayer {
                 ", startOfContract=" + startOfContract +
                 ", endOfContract=" + endOfContract +
                 ", numberOfShirt='" + numberOfShirt + '\'' +
+                ", advertisingContracts='" + advertisingContracts + '\'' +
                 '}';
     }
 }
