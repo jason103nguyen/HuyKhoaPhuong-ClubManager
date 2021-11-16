@@ -1,12 +1,12 @@
 package com.fa.training.dto;
 
-import com.fa.training.entities.Match;
+import com.fa.training.entities.Match1;
 
 import java.time.LocalDate;
 
-public class MatchDto {
+public class Match1Dto {
 
-    private int matchId;
+    private int match1Id;
     private double price;
     private LocalDate startAt;
     private LocalDate endAt;
@@ -17,12 +17,14 @@ public class MatchDto {
     private int numberOfTicket;
     private int numberOfTicketSold;
 
-    public MatchDto() {
+    public Match1Dto() {
 
     }
 
-    public MatchDto(double price, LocalDate startAt, LocalDate endAt, String result, boolean isOnAir,
-                    String opponentTeam, String stadium, int numberOfTicket, int numberOfTicketSold) {
+
+
+    public Match1Dto(double price, LocalDate startAt, LocalDate endAt, String result, boolean isOnAir,
+                     String opponentTeam, String stadium, int numberOfTicket, int numberOfTicketSold) {
         super();
         this.price = price;
         this.startAt = startAt;
@@ -36,24 +38,25 @@ public class MatchDto {
     }
 
 
-    public MatchDto(Match match) {
-        this.price = match.getPrice();
-        this.startAt = match.getStartAt();
-        this.endAt = match.getEndAt();
-        this.isOnAir = match.isOnAir();
-        this.result = match.getResult();
-        this.opponentTeam = match.getOpponentTeam();
-        this.stadium = match.getStadium();
-        this.numberOfTicket = match.getNumberOfTicket();
-        this.numberOfTicketSold = match.getNumberOfTicketSold();
+
+    public Match1Dto(Match1 match1) {
+        this.price = match1.getPrice();
+        this.startAt = match1.getStartAt();
+        this.endAt = match1.getEndAt();
+        this.isOnAir = match1.isOnAir();
+        this.result = match1.getResult();
+        this.opponentTeam = match1.getOpponentTeam();
+        this.stadium = match1.getStadium();
+        this.numberOfTicket = match1.getNumberOfTicket();
+        this.numberOfTicketSold = match1.getNumberOfTicketSold();
     }
 
-    public int getMatchId() {
-        return matchId;
+    public int getMatch1Id() {
+        return match1Id;
     }
 
-    public void setMatchId(int matchId) {
-        this.matchId = matchId;
+    public void setMatch1Id(int match1Id) {
+        this.match1Id = match1Id;
     }
 
     public double getPrice() {
@@ -130,8 +133,8 @@ public class MatchDto {
 
     @Override
     public String toString() {
-        return "MatchDto{" +
-                "matchId=" + matchId +
+        return "Match1Dto{" +
+                "match1Id=" + match1Id +
                 ", price=" + price +
                 ", startAt=" + startAt +
                 ", endAt=" + endAt +

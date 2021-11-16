@@ -5,14 +5,14 @@ import com.fa.training.entities.Ticket;
 public class TicketDto {
 
     private int tickeId;
-    private MatchDto matchIDto;
+    private Match1Dto matchIDto;
     private double price;
 
     public TicketDto() {
 
     }
 
-    public TicketDto(MatchDto matchiDto, double price) {
+    public TicketDto(Match1Dto matchiDto, double price) {
         super();
         matchIDto = matchiDto;
         this.price = price;
@@ -20,7 +20,7 @@ public class TicketDto {
 
     public TicketDto(Ticket ticket) {
 
-        this.matchIDto = new MatchDto(ticket.getMatch());
+        this.matchIDto = new Match1Dto(ticket.getMatch());
         this.price = ticket.getPrice();
     }
 
@@ -32,11 +32,11 @@ public class TicketDto {
         this.tickeId = tickeId;
     }
 
-    public MatchDto getMatchIDto() {
+    public Match1Dto getMatchIDto() {
         return matchIDto;
     }
 
-    public void setMatch1IDto(MatchDto matchiDto) {
+    public void setMatch1IDto(Match1Dto matchiDto) {
         matchIDto = matchiDto;
     }
 

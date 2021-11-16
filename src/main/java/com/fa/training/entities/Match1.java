@@ -1,6 +1,6 @@
 package com.fa.training.entities;
 
-import com.fa.training.dto.MatchDto;
+import com.fa.training.dto.Match1Dto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,13 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "match")
-public class Match {
+@Table(name = "match1")
+public class Match1 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "match_id", nullable = false)
-    private int matchId;
+    @Column(name = "match1_id", nullable = false)
+    private int match1Id;
 
     @Column(name = "result")
     private String result;
@@ -43,15 +43,15 @@ public class Match {
     @Column(name = "number_of_ticket_sold")
     private int numberOfTicketSold;
 
-    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "match1", cascade = CascadeType.ALL)
     private Set<Ticket> listTicket = new HashSet<Ticket>();
 
-    public Match() {
+    public Match1() {
 
     }
 
-    public Match(String result, boolean isOnAir, double price, LocalDate startAt, LocalDate endAt, String opponentTeam,
-                 String stadium, int numberOfTicket, int numberOfTicketSold) {
+    public Match1(String result, boolean isOnAir, double price, LocalDate startAt, LocalDate endAt, String opponentTeam,
+                  String stadium, int numberOfTicket, int numberOfTicketSold) {
         super();
         this.result = result;
         this.isOnAir = isOnAir;
@@ -64,25 +64,25 @@ public class Match {
         this.numberOfTicketSold = numberOfTicketSold;
     }
 
-    public Match(MatchDto matchDto) {
-        this.startAt = matchDto.getStartAt();
-        this.endAt = matchDto.getEndAt();
-        this.price = matchDto.getPrice();
-        this.isOnAir = matchDto.isOnAir();
-        this.result = matchDto.getResult();
-        this.opponentTeam = matchDto.getOpponentTeam();
-        this.stadium = matchDto.getStadium();
-        this.numberOfTicket = matchDto.getNumberOfTicket();
-        this.numberOfTicketSold = matchDto.getNumberOfTicketSold();
+    public Match1(Match1Dto match1Dto) {
+        this.startAt = match1Dto.getStartAt();
+        this.endAt = match1Dto.getEndAt();
+        this.price = match1Dto.getPrice();
+        this.isOnAir = match1Dto.isOnAir();
+        this.result = match1Dto.getResult();
+        this.opponentTeam = match1Dto.getOpponentTeam();
+        this.stadium = match1Dto.getStadium();
+        this.numberOfTicket = match1Dto.getNumberOfTicket();
+        this.numberOfTicketSold = match1Dto.getNumberOfTicketSold();
 
     }
 
-    public int getMatchId() {
-        return matchId;
+    public int getMatch1Id() {
+        return match1Id;
     }
 
-    public void setMatchId(int match1Id) {
-        this.matchId = matchId;
+    public void setMatch1Id(int match1Id) {
+        this.match1Id = match1Id;
     }
 
     public String getResult() {
@@ -160,7 +160,7 @@ public class Match {
     @Override
     public String toString() {
         return "Match1{" +
-                "match1Id=" + matchId +
+                "match1Id=" + match1Id +
                 ", result='" + result + '\'' +
                 ", isOnAir=" + isOnAir +
                 ", price=" + price +
