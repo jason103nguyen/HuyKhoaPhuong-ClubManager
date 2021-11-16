@@ -23,7 +23,8 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
      */
     public int create(FootballPlayerDto footballPlayerDto) {
 
-        int id = (int) footballPlayerDaoImpl.create(new FootballPlayer(footballPlayerDto));
+        FootballPlayer footballPlayer = new FootballPlayer(footballPlayerDto);
+        int id = (int) footballPlayerDaoImpl.create(footballPlayer);
         return id;
     }
 
