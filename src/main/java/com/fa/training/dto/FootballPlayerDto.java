@@ -1,6 +1,7 @@
 package com.fa.training.dto;
 
 import com.fa.training.entities.FootballPlayer;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -9,7 +10,11 @@ public class FootballPlayerDto {
     private int id;
     private String name;
     private double salary;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startOfContract;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endOfContract;
     private String numberOfShirt;
 
@@ -30,7 +35,7 @@ public class FootballPlayerDto {
         this.salary = footballPlayer.getSalary();
         this.startOfContract = footballPlayer.getStartOfContract();
         this.endOfContract = footballPlayer.getEndOfContract();
-        this.numberOfShirt = footballPlayer.getNumber();
+        this.numberOfShirt = footballPlayer.getNumberOfShirt();
     }
 
     public int getId() {
@@ -73,11 +78,11 @@ public class FootballPlayerDto {
         this.endOfContract = endOfContract;
     }
 
-    public String getNumber() {
+    public String getNumberOfShirt() {
         return numberOfShirt;
     }
 
-    public void setNumber(String numberOfShirt) {
+    public void setNumberOfShirt(String numberOfShirt) {
         this.numberOfShirt = numberOfShirt;
     }
 

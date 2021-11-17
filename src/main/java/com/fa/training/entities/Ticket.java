@@ -15,26 +15,22 @@ public class Ticket {
     @Column(name = "ticket_id", nullable = false)
     private int ticketId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "match_id")
-    private Match1 match1;
+    @ManyToOne
+    @JoinColumn(name = "match_id", referencedColumnName = "match_id")
+    private Match match;
 
     @Column(name = "price")
     private double price;
 
     public Ticket() {
-
     }
 
-    public Ticket(Match1 match1, double price) {
-        this.match1 = match1;
+    public Ticket(Match match, double price) {
+        this.match = match;
         this.price = price;
     }
 
     public Ticket(TicketDto ticketDto) {
-        this.price = ticketDto.getPrice();
-        this.match1 = new Match1(ticketDto.getMatchIDto());
     }
 
     public int getTicketId() {
@@ -45,12 +41,12 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-    public Match1 getMatch() {
-        return match1;
+    public Match getMatch() {
+        return match;
     }
 
-    public void setMatch(Match1 match1) {
-        this.match1 = match1;
+    public void setMatch(Match match) {
+        this.match = match;
     }
 
     public double getPrice() {
@@ -65,7 +61,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "ticketId=" + ticketId +
-                ", match=" + match1 +
+                ", match=" + match +
                 ", price=" + price +
                 '}';
     }

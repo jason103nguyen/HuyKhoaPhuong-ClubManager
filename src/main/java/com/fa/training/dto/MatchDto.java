@@ -1,70 +1,69 @@
 package com.fa.training.dto;
 
-import com.fa.training.entities.Match1;
+import com.fa.training.entities.Match;
+import com.fa.training.entities.Ticket;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Match1Dto {
+public class MatchDto {
 
-    private int match1Id;
-    private double price;
+    private int id;
+    private String opponentTeam;
     private LocalDate startAt;
     private LocalDate endAt;
     private String result;
     private boolean isOnAir;
-    private String opponentTeam;
     private String stadium;
     private int numberOfTicket;
     private int numberOfTicketSold;
+    private Set<Ticket> tickets = new HashSet<Ticket>();
 
-    public Match1Dto() {
-
+    public MatchDto(){
     }
 
-
-
-    public Match1Dto(double price, LocalDate startAt, LocalDate endAt, String result, boolean isOnAir,
-                     String opponentTeam, String stadium, int numberOfTicket, int numberOfTicketSold) {
-        super();
-        this.price = price;
+    public MatchDto(String opponentTeam, LocalDate startAt, LocalDate endAt,
+                    String result, boolean isOnAir, String stadium, int numberOfTicket,
+                    int numberOfTicketSold, Set<Ticket> tickets) {
+        this.opponentTeam = opponentTeam;
         this.startAt = startAt;
         this.endAt = endAt;
         this.result = result;
         this.isOnAir = isOnAir;
-        this.opponentTeam = opponentTeam;
         this.stadium = stadium;
         this.numberOfTicket = numberOfTicket;
         this.numberOfTicketSold = numberOfTicketSold;
+        this.tickets = tickets;
     }
 
-
-
-    public Match1Dto(Match1 match1) {
-        this.price = match1.getPrice();
-        this.startAt = match1.getStartAt();
-        this.endAt = match1.getEndAt();
-        this.isOnAir = match1.isOnAir();
-        this.result = match1.getResult();
-        this.opponentTeam = match1.getOpponentTeam();
-        this.stadium = match1.getStadium();
-        this.numberOfTicket = match1.getNumberOfTicket();
-        this.numberOfTicketSold = match1.getNumberOfTicketSold();
+    public MatchDto(Match match) {
+        this.id = match.getId();
+        this.opponentTeam = match.getOpponentTeam();
+        this.startAt = match.getStartAt();
+        this.endAt = match.getEndAt();
+        this.result = match.getResult();
+        this.isOnAir = match.isOnAir();
+        this.stadium = match.getStadium();
+        this.numberOfTicket = match.getNumberOfTicket();
+        this.numberOfTicketSold = match.getNumberOfTicketSold();
+        this.tickets = match.getTickets();
     }
 
-    public int getMatch1Id() {
-        return match1Id;
+    public int getId() {
+        return id;
     }
 
-    public void setMatch1Id(int match1Id) {
-        this.match1Id = match1Id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public double getPrice() {
-        return price;
+    public String getOpponentTeam() {
+        return opponentTeam;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setOpponentTeam(String opponentTeam) {
+        this.opponentTeam = opponentTeam;
     }
 
     public LocalDate getStartAt() {
@@ -99,14 +98,6 @@ public class Match1Dto {
         isOnAir = onAir;
     }
 
-    public String getOpponentTeam() {
-        return opponentTeam;
-    }
-
-    public void setOpponentTeam(String opponentTeam) {
-        this.opponentTeam = opponentTeam;
-    }
-
     public String getStadium() {
         return stadium;
     }
@@ -131,19 +122,27 @@ public class Match1Dto {
         this.numberOfTicketSold = numberOfTicketSold;
     }
 
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
     @Override
     public String toString() {
-        return "Match1Dto{" +
-                "match1Id=" + match1Id +
-                ", price=" + price +
+        return "MatchDto{" +
+                "id=" + id +
+                ", opponentTeam='" + opponentTeam + '\'' +
                 ", startAt=" + startAt +
                 ", endAt=" + endAt +
                 ", result='" + result + '\'' +
                 ", isOnAir=" + isOnAir +
-                ", opponentTeam='" + opponentTeam + '\'' +
                 ", stadium='" + stadium + '\'' +
                 ", numberOfTicket=" + numberOfTicket +
                 ", numberOfTicketSold=" + numberOfTicketSold +
+                ", tickets=" + tickets +
                 '}';
     }
 }

@@ -36,7 +36,7 @@ public class FootballPlayer {
     @Length(min = 1, max = 3, message = "{footballPlayer.numberOfShirt.Invalid}")
     private String numberOfShirt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "footballPlayer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "footballPlayer", fetch = FetchType.LAZY)
     private Set<AdvertisingContract> advertisingContracts;
 
     public FootballPlayer() {
@@ -56,7 +56,7 @@ public class FootballPlayer {
         this.salary = footballPlayerDto.getSalary();
         this.startOfContract = footballPlayerDto.getStartOfContract();
         this.endOfContract = footballPlayerDto.getEndOfContract();
-        this.numberOfShirt = footballPlayerDto.getNumber();
+        this.numberOfShirt = footballPlayerDto.getNumberOfShirt();
     }
 
     public int getId() {
@@ -99,11 +99,11 @@ public class FootballPlayer {
         this.endOfContract = endOfContract;
     }
 
-    public String getNumber() {
+    public String getNumberOfShirt() {
         return numberOfShirt;
     }
 
-    public void setNumber(String numberOfShirt) {
+    public void setNumberOfShirt(String numberOfShirt) {
         this.numberOfShirt = numberOfShirt;
     }
 

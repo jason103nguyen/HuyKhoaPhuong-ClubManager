@@ -8,27 +8,21 @@ import com.fa.training.entities.Brand;
 
 public class BrandDto {
 
-	int id;
+	private int id;
+	private String name;
 
-	String name;
-
-	private Set<AdvertisingContractDto> brandContracts = new HashSet<AdvertisingContractDto>();
-	
 	public BrandDto() {
-		
 	}
 	
-	public BrandDto(int id, String name) {
+	public BrandDto(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 
-	public BrandDto(int id, String name, Set<AdvertisingContractDto> brandContracts) {
+	public BrandDto(Brand brand) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.brandContracts = brandContracts;
+		this.id = brand.getId();
+		this.name = brand.getName();
 	}
 
 	public int getId() {
@@ -47,27 +41,11 @@ public class BrandDto {
 		this.name = name;
 	}
 
-	public Set<AdvertisingContractDto> getBrandContracts() {
-		return brandContracts;
+	@Override
+	public String toString() {
+		return "BrandDto{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
 	}
-
-	public void setBrandContracts(Set<AdvertisingContractDto> brandContracts) {
-		this.brandContracts = brandContracts;
-	}
-
-	public Brand dtoAsPersistent() {
-		Brand b = new Brand();
-
-		if (this.brandContracts != null) {
-			Set<AdvertisingContract> newContracts = new HashSet<>();
-			for (AdvertisingContractDto c : this.brandContracts) {
-				newContracts.add(c.dtoAsPersistent());
-			}
-			b.setBrandContracts(newContracts);
-		}
-		b.setId(this.id);
-		b.setName(this.name);
-		return b;
-	}
-
 }

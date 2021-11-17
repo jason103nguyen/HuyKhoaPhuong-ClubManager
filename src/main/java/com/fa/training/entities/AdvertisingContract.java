@@ -1,5 +1,7 @@
 package com.fa.training.entities;
 
+import com.fa.training.dto.AdvertisingContractDto;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,8 +25,8 @@ public class AdvertisingContract {
     @JoinColumn(name = "fp_id", referencedColumnName = "fp_id")
     private FootballPlayer footballPlayer;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "brand_id")
+    @ManyToOne
+	@JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
     private Brand brand;
 
     @Column(name = "deal_value")
@@ -36,6 +38,16 @@ public class AdvertisingContract {
     public AdvertisingContract(FootballPlayer footballPlayer, Brand brand, double dealValue) {
         this.footballPlayer = footballPlayer;
         this.brand = brand;
+        this.dealValue = dealValue;
+    }
+
+    public AdvertisingContract(AdvertisingContractDto advertisingContractDto) {
+        FootballPlayer footballPlayer = new FootballPlayer(advertisingContractDto.getFootballPlayerDto());
+        this.footballPlayer = footballPlayer;
+
+        Brand brand = new Brand(advertisingContractDto.getBrandDto());
+        this.brand = brand;
+
         this.dealValue = dealValue;
     }
 

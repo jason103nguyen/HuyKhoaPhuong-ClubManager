@@ -1,5 +1,7 @@
 package com.fa.training.entities;
 
+import com.fa.training.dto.BrandDto;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,19 +29,20 @@ public class Brand {
 	@NotNull
 	String name;
 	
-	@OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
 	private Set<AdvertisingContract> brandContracts = new HashSet<>();
 	
-	public Brand () {
-		
+	public Brand() {
 	}
 	
-	public Brand (String name) {
+	public Brand(String name) {
 		this.name = name;
 	}
 
-	
-	
+	public Brand(BrandDto brandDto) {
+		this.name = brandDto.getName();
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -63,6 +66,13 @@ public class Brand {
 	public void setBrandContracts(Set<AdvertisingContract> brandContracts) {
 		this.brandContracts = brandContracts;
 	}
-	
-	
- }
+
+	@Override
+	public String toString() {
+		return "Brand{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", brandContracts=" + brandContracts +
+				'}';
+	}
+}
