@@ -1,11 +1,17 @@
 package com.fa.training.service;
 
+import com.fa.training.constants_file.ConstantString;
 import com.fa.training.dao.FootballPlayerDaoImpl;
 import com.fa.training.dto.FootballPlayerDto;
 import com.fa.training.entities.FootballPlayer;
 import com.fa.training.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FootballPlayerServiceImpl implements FootballPlayerService {
@@ -15,6 +21,7 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
     @Autowired
     public FootballPlayerServiceImpl(FootballPlayerDaoImpl footballPlayerDaoImpl) {
         this.footballPlayerDaoImpl = footballPlayerDaoImpl;
+        createSampleFb();
     }
 
     /**
@@ -56,6 +63,22 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
     }
 
     /**
+     * Get all football player
+     * @return
+     */
+    public List<FootballPlayerDto> readAll() {
+        List<FootballPlayer> listFb = footballPlayerDaoImpl.readAll();
+        List<FootballPlayerDto> listFbDto = new ArrayList<>();
+
+        for (FootballPlayer fb : listFb) {
+            FootballPlayerDto fbDto = new FootballPlayerDto(fb);
+            listFbDto.add(fbDto);
+        }
+
+        return listFbDto;
+    }
+
+    /**
      * Update info of football player
      * @param footballPlayerDto
      */
@@ -77,5 +100,28 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
             throw new DatabaseException("The ID doesn't exists!");
         }
 
+    }
+
+    /**
+     * Create sample football player in database
+     */
+    public void createSampleFb() {
+
+        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_1", 1000,
+                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                "01");
+        FootballPlayerDto fb_2 = new FootballPlayerDto("FB_2", 1000,
+                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                "02");
+        FootballPlayerDto fb_3 = new FootballPlayerDto("FB_3", 1000,
+                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
+                "03");
+
+        create(fb_1);
+        create(fb_2);
+        create(fb_3);
     }
 }

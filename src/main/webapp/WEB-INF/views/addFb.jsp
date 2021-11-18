@@ -9,59 +9,48 @@
     <title>Add Football Player</title>
 </head>
 <body style="width:50%; margin: auto;">
-<div style="background-color: #EEEEEE; padding: 20px">
-    <h1>Manager Club</h1>
-    <p>Add Football Player</p>
-</div>
+    <div style="background-color: #EEEEEE; padding: 20px">
+        <h1>Manager Club</h1>
+        <p>The List Football Player</p>
+    </div>
 
-<div>
-    <p>Add new football player <hr/></p>
+    <hr/>
 
-    <div>
-        <form:form action="add-fb" method="POST" modelAttribute="footballPlayerDto">
+    <div align="center">
+        <form:form method="POST" modelAttribute="footballPlayer" action="add-fb">
             <table>
                 <tr>
-                    <td>Name</td>
+                    <td><label>Name</label></td>
                     <td><form:input type="text" path="name"/></td>
                 </tr>
 
                 <tr>
-                    <td>Salary</td>
+                    <td><label>Salary</label></td>
                     <td><form:input type="text" path="salary"/></td>
                 </tr>
 
                 <tr>
-                    <td>Start of contract (dd-mm-yyyy)</td>
+                    <td><label>Start of contract (dd/mm/yyyy)</label></td>
                     <td><form:input type="text" path="startOfContract"/></td>
                 </tr>
 
                 <tr>
-                    <td>End of contract (dd-mm-yyyy)</td>
+                    <td><label>End of contract (dd/mm/yyyy)</label></td>
                     <td><form:input type="text" path="endOfContract"/></td>
                 </tr>
 
                 <tr>
-                    <td>Number of shirt</td>
+                    <td><label>Number of shirt</label></td>
                     <td><form:input type="text" path="numberOfShirt"/></td>
                 </tr>
 
                 <tr>
-                    <td><input type="submit" value="Add Football Player"></td>
+                    <td>
+                        <input type="submit" value="Add Football Player"/>
+                    </td>
                 </tr>
             </table>
-
         </form:form>
     </div>
-</div>
-
-<div>
-<p>Show Football Player</p>
-    <c:forEach items="${listFb}" var="fb">
-        <tr>
-            <td>${fb.name}</td><br/>
-        </tr>
-    </c:forEach>
-</div>
-
 </body>
 </html>

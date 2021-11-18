@@ -8,6 +8,9 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<%
+    String redirectURL = "/HuyKhoaPhuong_ClubManager_war/list-fb";
+    response.sendRedirect(redirectURL);
+%>
 </body>
 </html>

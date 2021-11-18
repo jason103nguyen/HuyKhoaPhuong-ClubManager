@@ -29,94 +29,73 @@ public class FootballPlayerController {
     public ModelAndView doGetAddFootballPlayer() {
 
         FootballPlayerDto footballPlayerDto = new FootballPlayerDto();
-        List<FootballPlayerDto> listFb = new ArrayList<>();
-
-        for(int i=0;i<3;i++) {
-            FootballPlayerDto fb = new FootballPlayerDto();
-            fb.setName("fb_" + String.valueOf(i));
-            listFb.add(fb);
-        }
-
         ModelAndView mv = new ModelAndView("addFb");
-        mv.addObject("footballPlayerDto", footballPlayerDto);
-        mv.addObject("listFb", listFb);
+        mv.addObject("footballPlayer", footballPlayerDto);
+
         return mv;
     }
 
     @PostMapping(value = "/add-fb")
-    public ModelAndView doPostAddFootballPlayer(@ModelAttribute("footballPlayerDto") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) FootballPlayerDto footballPlayerDto) {
+    public String doPostAddFootballPlayer(@ModelAttribute("footballPlayer") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) FootballPlayerDto footballPlayerDto) {
 
-        return new ModelAndView("infoFb");
+        footballPlayerService.create(footballPlayerDto);
+        return "redirect:/list-fb";
     }
 
-    @GetMapping(value = "/get-fb-number-shirt")
-    public String getFbByNumberShirt() throws DatabaseException {
+    @GetMapping(value = "/list-fb")
+    public ModelAndView doGetListFb() {
 
-        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_2", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "02");
+        List<FootballPlayerDto> listFb = footballPlayerService.readAll();
+        ModelAndView mv = new ModelAndView("listFb");
+        mv.addObject("listFb", listFb);
 
-        footballPlayerService.create(fb_1);
-
-        FootballPlayerDto fb_2 = footballPlayerService.readByNumberOfShirt(fb_1.getNumberOfShirt());
-        System.out.println(fb_2);
-
-        return "hello";
+        return mv;
     }
 
-    @GetMapping(value = "/get-fb-id")
-    public String getFbById() throws DatabaseException {
+    @GetMapping(value = "/view-fb")
+    public ModelAndView doGetViewFb(@RequestParam("id") int id) {
 
-        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_3", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "03");
+        FootballPlayerDto fbDto = null;
+        try {
+            fbDto = footballPlayerService.readOne(id);
+        } catch (DatabaseException ex) {
+            System.out.println(ex.getMsgError());
+        }
 
-        int id = footballPlayerService.create(fb_1);
-
-        FootballPlayerDto fb_2 = footballPlayerService.readOne(id);
-        System.out.println(fb_2);
-
-        return "hello";
+        ModelAndView mv = new ModelAndView("viewFb");
+        mv.addObject("fb", fbDto);
+        return mv;
     }
 
-    @PutMapping(value = "/update-fb")
-    public String updateFb() throws DatabaseException {
+    @GetMapping(value = "/edit-fb")
+    public ModelAndView doGetEditFb(@RequestParam("id") int id) {
 
-        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_4", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "04");
-
-        int id = footballPlayerService.create(fb_1);
-        System.out.println("Before update: " + fb_1.toString());
-
-        FootballPlayerDto fb_2 = new FootballPlayerDto("FB_444", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "04");
-        fb_2.setId(id);
-        footballPlayerService.updateOrCreate(fb_2);
-
-        FootballPlayerDto fb_3 = footballPlayerService.readOne(id);
-        System.out.println("After update: " + fb_3.toString());
-
-        return "hello";
+        FootballPlayerDto fbDto = null;
+        try {
+            fbDto = footballPlayerService.readOne(id);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        ModelAndView mv = new ModelAndView("editFb", "fb", fbDto);
+        return mv;
     }
 
-    @DeleteMapping(value = "/delete-fb")
-    public String deleteFb() throws DatabaseException {
+    @PostMapping(value = "/edit-fb")
+    public String doPostEditFb(@ModelAttribute("fb") FootballPlayerDto fb) {
 
-        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_5", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "05");
-
-        int id = footballPlayerService.create(fb_1);
-
-        footballPlayerService.delete(id);
-
-        return "hello";
+        footballPlayerService.updateOrCreate(fb);
+        return "redirect:/list-fb";
     }
+
+    @GetMapping(value = "/delete-fb")
+    public String doGetDeleteFb(@RequestParam("id") int id) {
+
+        try {
+            footballPlayerService.delete(id);
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/list-fb";
+    }
+
 }

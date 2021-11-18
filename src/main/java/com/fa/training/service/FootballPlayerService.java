@@ -3,6 +3,8 @@ package com.fa.training.service;
 import com.fa.training.dto.FootballPlayerDto;
 import com.fa.training.exception.DatabaseException;
 
+import java.util.List;
+
 public interface FootballPlayerService {
 
     /**
@@ -35,4 +37,10 @@ public interface FootballPlayerService {
      * @param id
      */
     void delete(int id) throws DatabaseException;
+
+    /**
+     * Get all football player
+     * @return
+     */
+    public List<FootballPlayerDto> readAll();
 }
