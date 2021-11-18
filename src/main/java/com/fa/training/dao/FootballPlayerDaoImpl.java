@@ -13,7 +13,7 @@ import java.util.List;
 @Transactional
 public class FootballPlayerDaoImpl extends AbstractDao<FootballPlayer> {
 
-//    private LocalSessionFactoryBean sessionFactory;
+    private LocalSessionFactoryBean sessionFactory;
 
     @Autowired
     public FootballPlayerDaoImpl(LocalSessionFactoryBean sessionFactory) {

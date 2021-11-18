@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class TicketDaoImpl extends AbstractDao<Ticket> {
 
     @Autowired
-    private LocalSessionFactoryBean localSessionFactoryBean;
-
     public TicketDaoImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         super(Ticket.class, localSessionFactoryBean);
     }

@@ -7,29 +7,27 @@ import com.fa.training.entities.FootballPlayer;
 public class AdvertisingContractDto {
 
 	private int id;
-
 	private FootballPlayerDto footballPlayerDto;
-
-	private Brand brand;
-
+	private BrandDto brandDto;
 	private double dealValue;
 
 	public AdvertisingContractDto() {
-
 	}
 
-	public AdvertisingContractDto(FootballPlayerDto footballPlayerDto, Brand brand, double dealValue) {
+	public AdvertisingContractDto(FootballPlayerDto footballPlayerDto, BrandDto brandDto, double dealValue) {
 		super();
 		this.footballPlayerDto = footballPlayerDto;
-		this.brand = brand;
+		this.brandDto = brandDto;
 		this.dealValue = dealValue;
 	}
 
-	public AdvertisingContractDto(int id, FootballPlayerDto footballPlayerDto, Brand brand, double dealValue) {
+	public AdvertisingContractDto(AdvertisingContract advertisingContract) {
 		super();
-		this.id = id;
+		this.id = advertisingContract.getId();
+		FootballPlayerDto footballPlayerDto = new FootballPlayerDto(advertisingContract.getFootballPlayer());
 		this.footballPlayerDto = footballPlayerDto;
-		this.brand = brand;
+		BrandDto brandDto = new BrandDto(advertisingContract.getBrand());
+		this.brandDto = brandDto;
 		this.dealValue = dealValue;
 	}
 
@@ -49,12 +47,12 @@ public class AdvertisingContractDto {
 		this.footballPlayerDto = footballPlayerDto;
 	}
 
-	public Brand getBrand() {
-		return brand;
+	public BrandDto getBrandDto() {
+		return brandDto;
 	}
 
-	public void setBrand(Brand brand) {
-		this.brand = brand;
+	public void setBrandDto(BrandDto brandDto) {
+		this.brandDto = brandDto;
 	}
 
 	public double getDealValue() {
@@ -63,30 +61,6 @@ public class AdvertisingContractDto {
 
 	public void setDealValue(double dealValue) {
 		this.dealValue = dealValue;
-	}
-
-	public AdvertisingContract dtoAsPersistent() {
-		AdvertisingContract a = new AdvertisingContract();
-		a.setId(this.id);
-		if (this.brand != null) {
-			a.setBrand(this.brand);
-		}
-
-		FootballPlayer footballPlayer = new FootballPlayer(this.footballPlayerDto);
-		a.setFootballPlayer(footballPlayer);
-		a.setDealValue(this.dealValue);
-		return a;
-	}
-
-	public AdvertisingContractDto transformPersistentToDto(final AdvertisingContract contract) {
-		AdvertisingContractDto dto = new AdvertisingContractDto();
-
-		dto.setId(contract.getId());
-		dto.setBrand(contract.getBrand());
-		dto.setPlayerId(contract.getPlayerId());
-		dto.setDealValue(contract.getDealValue());
-
-		return dto;
 	}
 
 }

@@ -5,13 +5,15 @@ import com.fa.training.dto.FootballPlayerDto;
 import com.fa.training.exception.DatabaseException;
 import com.fa.training.service.FootballPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FootballPlayerController {
@@ -24,15 +26,27 @@ public class FootballPlayerController {
     }
 
     @GetMapping(value = "/add-fb")
-    public String addFootballPlayer() {
+    public ModelAndView doGetAddFootballPlayer() {
 
-        FootballPlayerDto footballPlayerDto = new FootballPlayerDto("FB_1", 1000,
-                LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "01");
+        FootballPlayerDto footballPlayerDto = new FootballPlayerDto();
+        List<FootballPlayerDto> listFb = new ArrayList<>();
 
-        footballPlayerService.create(footballPlayerDto);
-        return "hello";
+        for(int i=0;i<3;i++) {
+            FootballPlayerDto fb = new FootballPlayerDto();
+            fb.setName("fb_" + String.valueOf(i));
+            listFb.add(fb);
+        }
+
+        ModelAndView mv = new ModelAndView("addFb");
+        mv.addObject("footballPlayerDto", footballPlayerDto);
+        mv.addObject("listFb", listFb);
+        return mv;
+    }
+
+    @PostMapping(value = "/add-fb")
+    public ModelAndView doPostAddFootballPlayer(@ModelAttribute("footballPlayerDto") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) FootballPlayerDto footballPlayerDto) {
+
+        return new ModelAndView("infoFb");
     }
 
     @GetMapping(value = "/get-fb-number-shirt")
@@ -45,7 +59,7 @@ public class FootballPlayerController {
 
         footballPlayerService.create(fb_1);
 
-        FootballPlayerDto fb_2 = footballPlayerService.readByNumberOfShirt(fb_1.getNumber());
+        FootballPlayerDto fb_2 = footballPlayerService.readByNumberOfShirt(fb_1.getNumberOfShirt());
         System.out.println(fb_2);
 
         return "hello";

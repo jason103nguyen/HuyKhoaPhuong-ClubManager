@@ -4,40 +4,39 @@ import com.fa.training.entities.Ticket;
 
 public class TicketDto {
 
-    private int tickeId;
-    private Match1Dto matchIDto;
+    private int ticketId;
+    private MatchDto matchDto;
     private double price;
 
     public TicketDto() {
-
     }
 
-    public TicketDto(Match1Dto matchiDto, double price) {
+    public TicketDto(MatchDto matchDto, double price) {
         super();
-        matchIDto = matchiDto;
+        this.matchDto = matchDto;
         this.price = price;
     }
 
     public TicketDto(Ticket ticket) {
-
-        this.matchIDto = new Match1Dto(ticket.getMatch());
+        MatchDto matchDto = new MatchDto(ticket.getMatch());
+        this.matchDto = matchDto;
         this.price = ticket.getPrice();
     }
 
-    public int getTickeId() {
-        return tickeId;
+    public int getTicketId() {
+        return ticketId;
     }
 
-    public void setTickeId(int tickeId) {
-        this.tickeId = tickeId;
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 
-    public Match1Dto getMatchIDto() {
-        return matchIDto;
+    public MatchDto getMatchDto() {
+        return matchDto;
     }
 
-    public void setMatch1IDto(Match1Dto matchiDto) {
-        matchIDto = matchiDto;
+    public void setMatchDto(MatchDto matchDto) {
+        this.matchDto = matchDto;
     }
 
     public double getPrice() {
@@ -50,9 +49,12 @@ public class TicketDto {
 
     @Override
     public String toString() {
-        return "TicketDto [tickeId=" + tickeId + ", matchIDto=" + matchIDto + ", price=" + price + "]";
+        return "TicketDto{" +
+                "ticketId=" + ticketId +
+                ", matchDto=" + matchDto +
+                ", price=" + price +
+                '}';
     }
-
 }
 
 
