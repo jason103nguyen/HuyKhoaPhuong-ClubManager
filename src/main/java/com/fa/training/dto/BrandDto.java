@@ -13,11 +13,11 @@ public class BrandDto {
 	String name;
 
 	private Set<AdvertisingContractDto> brandContracts = new HashSet<AdvertisingContractDto>();
-	
+
 	public BrandDto() {
-		
+
 	}
-	
+
 	public BrandDto(int id, String name) {
 		super();
 		this.id = id;
@@ -58,16 +58,29 @@ public class BrandDto {
 	public Brand dtoAsPersistent() {
 		Brand b = new Brand();
 
-		if (this.brandContracts != null) {
+		if (this.brandContracts != null && this.brandContracts.size() != 0) {
 			Set<AdvertisingContract> newContracts = new HashSet<>();
 			for (AdvertisingContractDto c : this.brandContracts) {
 				newContracts.add(c.dtoAsPersistent());
 			}
 			b.setBrandContracts(newContracts);
 		}
-		b.setId(this.id);
+		if (this.id != 0) {
+			b.setId(this.id);
+		}
+		
 		b.setName(this.name);
 		return b;
+	}
+
+	public BrandDto transformPersistentToDto(final Brand brand) {
+		BrandDto brandDto = new BrandDto();
+
+		brandDto.setId(brand.getId());
+		brandDto.setName(brand.getName());
+		brandDto.setBrandContracts(brandContracts);
+		return brandDto;
+
 	}
 
 }
