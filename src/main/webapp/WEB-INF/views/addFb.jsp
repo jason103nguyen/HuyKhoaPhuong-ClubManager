@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,15 @@
 
         </form:form>
     </div>
+</div>
+
+<div>
+<p>Show Football Player</p>
+    <c:forEach items="${listFb}" var="fb">
+        <tr>
+            <td>${fb.name}</td><br/>
+        </tr>
+    </c:forEach>
 </div>
 
 </body>

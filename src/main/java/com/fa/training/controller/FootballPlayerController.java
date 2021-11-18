@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FootballPlayerController {
@@ -27,7 +29,18 @@ public class FootballPlayerController {
     public ModelAndView doGetAddFootballPlayer() {
 
         FootballPlayerDto footballPlayerDto = new FootballPlayerDto();
-        return new ModelAndView("addFb", "footballPlayerDto", footballPlayerDto);
+        List<FootballPlayerDto> listFb = new ArrayList<>();
+
+        for(int i=0;i<3;i++) {
+            FootballPlayerDto fb = new FootballPlayerDto();
+            fb.setName("fb_" + String.valueOf(i));
+            listFb.add(fb);
+        }
+
+        ModelAndView mv = new ModelAndView("addFb");
+        mv.addObject("footballPlayerDto", footballPlayerDto);
+        mv.addObject("listFb", listFb);
+        return mv;
     }
 
     @PostMapping(value = "/add-fb")
