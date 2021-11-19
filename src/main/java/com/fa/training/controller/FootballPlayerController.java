@@ -36,7 +36,7 @@ public class FootballPlayerController {
     }
 
     @PostMapping(value = "/add-fb")
-    public String doPostAddFootballPlayer(@ModelAttribute("footballPlayer") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) FootballPlayerDto footballPlayerDto) {
+    public String doPostAddFootballPlayer(@ModelAttribute("footballPlayer") FootballPlayerDto footballPlayerDto) {
 
         footballPlayerService.create(footballPlayerDto);
         return "redirect:/list-fb";

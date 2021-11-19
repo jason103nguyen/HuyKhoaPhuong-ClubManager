@@ -107,18 +107,18 @@ public class FootballPlayerServiceImpl implements FootballPlayerService {
      */
     public void createSampleFb() {
 
-        FootballPlayerDto fb_1 = new FootballPlayerDto("FB_1", 1000,
+        FootballPlayerDto fb_1 = new FootballPlayerDto("Cristiano Ronaldo", 10000,
                 LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
                 LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "01");
-        FootballPlayerDto fb_2 = new FootballPlayerDto("FB_2", 1000,
+                "7");
+        FootballPlayerDto fb_2 = new FootballPlayerDto("Lionel Messi", 11000,
                 LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
                 LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "02");
-        FootballPlayerDto fb_3 = new FootballPlayerDto("FB_3", 1000,
+                "11");
+        FootballPlayerDto fb_3 = new FootballPlayerDto("Kylian Mbappé", 12000,
                 LocalDate.parse("11-11-2021", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
                 LocalDate.parse("11-11-2025", DateTimeFormatter.ofPattern(ConstantString.DD_MM_YYYY)),
-                "03");
+                "10");
 
         create(fb_1);
         create(fb_2);
