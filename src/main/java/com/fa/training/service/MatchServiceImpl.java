@@ -2,10 +2,15 @@ package com.fa.training.service;
 
 import com.fa.training.dao.MatchDaoImpl;
 import com.fa.training.dto.MatchDto;
+import com.fa.training.dto.MatchDto;
+import com.fa.training.entities.Match;
 import com.fa.training.entities.Match;
 import com.fa.training.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -39,6 +44,22 @@ public class MatchServiceImpl implements MatchService {
             throw new DatabaseException("The ID doesn't exists!");
         }
         return new MatchDto(match);
+    }
+
+    /**
+     * Get all match
+     * @return
+     */
+    public List<MatchDto> readAll() {
+        List<Match> listMatch = matchDaoImpl.readAll();
+        List<MatchDto> listMatchDto = new ArrayList<>();
+
+        for (Match brand : listMatch) {
+            MatchDto matchDto = new MatchDto(brand);
+            listMatchDto.add(matchDto);
+        }
+
+        return listMatchDto;
     }
 
     /**

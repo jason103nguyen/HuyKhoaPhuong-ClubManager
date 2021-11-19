@@ -2,10 +2,15 @@ package com.fa.training.service;
 
 import com.fa.training.dao.AdvertisingContractDaoImpl;
 import com.fa.training.dto.AdvertisingContractDto;
+import com.fa.training.dto.AdvertisingContractDto;
+import com.fa.training.entities.AdvertisingContract;
 import com.fa.training.entities.AdvertisingContract;
 import com.fa.training.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AdvertisingContractServiceImpl implements AdvertisingContractService {
@@ -41,6 +46,22 @@ public class AdvertisingContractServiceImpl implements AdvertisingContractServic
 
         AdvertisingContractDto advertisingContractDto = new AdvertisingContractDto(advertisingContract);
         return advertisingContractDto;
+    }
+
+    /**
+     * Get all advertising contract
+     * @return
+     */
+    public List<AdvertisingContractDto> readAll() {
+        List<AdvertisingContract> listAd = advertisingContractDaoImpl.readAll();
+        List<AdvertisingContractDto> listAdDto = new ArrayList<>();
+
+        for (AdvertisingContract ad : listAd) {
+            AdvertisingContractDto adDto = new AdvertisingContractDto(ad);
+            listAdDto.add(adDto);
+        }
+
+        return listAdDto;
     }
 
     /**

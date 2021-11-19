@@ -3,6 +3,8 @@ package com.fa.training.service;
 import com.fa.training.dto.MatchDto;
 import com.fa.training.exception.DatabaseException;
 
+import java.util.List;
+
 public interface MatchService {
 
     /**
@@ -17,6 +19,12 @@ public interface MatchService {
      * @return
      */
     public MatchDto readOne(int id) throws DatabaseException;
+
+    /**
+     * Get all match
+     * @return
+     */
+    public List<MatchDto> readAll();
 
     /**
      * Update or create a match

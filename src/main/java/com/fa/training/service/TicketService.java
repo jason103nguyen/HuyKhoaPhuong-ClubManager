@@ -3,6 +3,8 @@ package com.fa.training.service;
 import com.fa.training.dto.TicketDto;
 import com.fa.training.exception.DatabaseException;
 
+import java.util.List;
+
 public interface TicketService {
 
     /**
@@ -17,6 +19,12 @@ public interface TicketService {
      * @return
      */
     public TicketDto readOne(int id) throws DatabaseException;
+
+    /**
+     * Get all ticket
+     * @return
+     */
+    public List<TicketDto> readAll();
 
     /**
      * Update or create a ticket

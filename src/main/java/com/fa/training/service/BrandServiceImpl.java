@@ -2,10 +2,15 @@ package com.fa.training.service;
 
 import com.fa.training.dao.BrandDaoImpl;
 import com.fa.training.dto.BrandDto;
+import com.fa.training.dto.BrandDto;
+import com.fa.training.entities.Brand;
 import com.fa.training.entities.Brand;
 import com.fa.training.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -39,6 +44,22 @@ public class BrandServiceImpl implements BrandService {
             throw new DatabaseException("The ID doesn't exists!");
         }
         return new BrandDto(brand);
+    }
+
+    /**
+     * Get all football player
+     * @return
+     */
+    public List<BrandDto> readAll() {
+        List<Brand> listBrand = brandDaoImpl.readAll();
+        List<BrandDto> listBrandDto = new ArrayList<>();
+
+        for (Brand brand : listBrand) {
+            BrandDto brandDto = new BrandDto(brand);
+            listBrandDto.add(brandDto);
+        }
+
+        return listBrandDto;
     }
 
     /**

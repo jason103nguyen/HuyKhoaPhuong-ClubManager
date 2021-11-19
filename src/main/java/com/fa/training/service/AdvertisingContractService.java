@@ -3,6 +3,8 @@ package com.fa.training.service;
 import com.fa.training.dto.AdvertisingContractDto;
 import com.fa.training.exception.DatabaseException;
 
+import java.util.List;
+
 public interface AdvertisingContractService {
 
     /**
@@ -17,6 +19,12 @@ public interface AdvertisingContractService {
      * @return
      */
     public AdvertisingContractDto readOne(int id) throws DatabaseException;
+
+    /**
+     * Get all advertising contract
+     * @return
+     */
+    public List<AdvertisingContractDto> readAll();
 
     /**
      * Update or create a advertising contract

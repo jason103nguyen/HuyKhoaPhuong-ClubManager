@@ -3,6 +3,8 @@ package com.fa.training.service;
 import com.fa.training.dto.BrandDto;
 import com.fa.training.exception.DatabaseException;
 
+import java.util.List;
+
 public interface BrandService {
     /**
      * Add a brand to database
@@ -16,6 +18,12 @@ public interface BrandService {
      * @return
      */
     public BrandDto readOne(int id) throws DatabaseException;
+
+    /**
+     * Get all football player
+     * @return
+     */
+    public List<BrandDto> readAll();
 
     /**
      * Update or create a brand
